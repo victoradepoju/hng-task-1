@@ -19,8 +19,9 @@ public class AppController {
 
     @GetMapping
     public ResponseEntity<WelcomeResponse> welcome(
-            @RequestParam(name = "visitor_name", required = false) String visitor
+            @RequestParam(name = "visitor_name", required = false) String visitor,
+            @RequestHeader(value = "X-Forwarded-For", required = false) String forwardedFor
     ) {
-        return ResponseEntity.ok(welcomeService.welcome(visitor));
+        return ResponseEntity.ok(welcomeService.welcome(visitor, forwardedFor));
     }
 }

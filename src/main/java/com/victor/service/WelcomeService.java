@@ -28,7 +28,7 @@ public class WelcomeService {
         this.request = request;
     }
 
-    public WelcomeResponse welcome(String visitor) {
+    public WelcomeResponse welcome(String visitor, String ipAddress) {
 
         if (visitor == null) {
             throw new NameNotFoundException("Oops! Seems you forgot to add your name using " +
@@ -41,7 +41,7 @@ public class WelcomeService {
 
         GeoLocation geoLocation = getGeo();
 
-        String ipAddress = request.getRemoteAddr();
+        String realIpAddress = ipAddress != null ? ipAddress : request.getRemoteAddr();
         double lat = geoLocation.latitude();
         double lon = geoLocation.longitude();
 
@@ -51,7 +51,7 @@ public class WelcomeService {
         String sanitizedName = visitor.replaceAll("\"", "").trim();
 
         return new WelcomeResponse(
-                ipAddress,
+                realIpAddress,
                 city,
                 "Hello, " + sanitizedName + "!, the temperature is " + temp + " degrees Celsius in " + city
         );
