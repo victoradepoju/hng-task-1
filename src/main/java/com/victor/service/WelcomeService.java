@@ -46,7 +46,7 @@ public class WelcomeService {
         double lon = geoLocation.longitude();
 
         Weather weather = getWeather(lat, lon, openWeatherMapApiKey);
-        String city = weather.name();
+        String city = geoLocation.city();
         var temp =  weather.main().get("temp");
         String sanitizedName = visitor.replaceAll("\"", "").trim();
 
