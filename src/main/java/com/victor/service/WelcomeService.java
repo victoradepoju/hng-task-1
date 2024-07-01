@@ -38,10 +38,12 @@ public class WelcomeService {
         if (visitor.isEmpty()) {
             throw new NameNotFoundException("Sorry, 'visitor_name' query parameter cannot be empty");
         }
-
-        GeoLocation geoLocation = getGeo();
-
         String realIpAddress = ipAddress != null ? ipAddress : request.getRemoteAddr();
+
+        GeoLocation geoLocation = getGeo(realIpAddress);
+
+
+
         double lat = geoLocation.latitude();
         double lon = geoLocation.longitude();
 
@@ -52,15 +54,13 @@ public class WelcomeService {
 
         return new WelcomeResponse(
                 realIpAddress,
-                lat,
-                lon,
                 city,
                 "Hello, " + sanitizedName + "!, the temperature is " + temp + " degrees Celsius in " + city
         );
     }
 
-    public GeoLocation getGeo() {
-        String locationUrl = String.format("https://api.ipgeolocation.io/ipgeo?apiKey=%s", ipGeolocationApiKey);
+    public GeoLocation getGeo(String ip) {
+        String locationUrl = String.format("https://api.ipgeolocation.io/ipgeo?apiKey=%s&ip=%s", ipGeolocationApiKey, ip);
 
         return restTemplate.getForObject(locationUrl, GeoLocation.class);
     }
