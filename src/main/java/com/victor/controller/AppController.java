@@ -19,7 +19,7 @@ public class AppController {
 
     @GetMapping
     public ResponseEntity<WelcomeResponse> welcome(
-            @RequestParam(name = "visitor_name") String visitor
+            @RequestParam(name = "visitor_name", required = false) String visitor
     ) {
         return ResponseEntity.ok(welcomeService.welcome(visitor));
     }

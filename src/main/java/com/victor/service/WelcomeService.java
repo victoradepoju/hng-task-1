@@ -1,6 +1,7 @@
 package com.victor.service;
 
 import com.victor.dtos.WelcomeResponse;
+import com.victor.handler.NameNotFoundException;
 import com.victor.model.GeoLocation;
 import com.victor.model.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,15 @@ public class WelcomeService {
 
     public WelcomeResponse welcome(String visitor) {
 
+        if (visitor == null) {
+            throw new NameNotFoundException("Oops! Seems you forgot to add your name using " +
+                    "the 'visitor_name' query parameter");
+        }
+
+        if (visitor.isEmpty()) {
+            throw new NameNotFoundException("Sorry, 'visitor_name' query parameter cannot be empty");
+        }
+
         GeoLocation geoLocation = getGeo();
 
         String ipAddress = geoLocation.ip();
@@ -35,12 +45,12 @@ public class WelcomeService {
         Weather weather = getWeather(lat, lon, openWeatherMapApiKey);
         String city = weather.name();
         double temp = (double) weather.main().get("temp");
-
+        String sanitizedName = visitor.replaceAll("\"", "").trim();
 
         return new WelcomeResponse(
                 ipAddress,
                 city,
-                "Hello " + visitor + "!, the temperature is " + temp + " degrees Celsius in " + city
+                "Hello, " + sanitizedName + "!, the temperature is " + temp + " degrees Celsius in " + city
         );
     }
 
