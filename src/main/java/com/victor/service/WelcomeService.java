@@ -52,7 +52,9 @@ public class WelcomeService {
 
         return new WelcomeResponse(
                 realIpAddress,
-                "Some new City now",
+                lat,
+                lon,
+                city,
                 "Hello, " + sanitizedName + "!, the temperature is " + temp + " degrees Celsius in " + city
         );
     }
