@@ -1,14 +1,10 @@
 package com.victor.controller;
 
 import com.victor.dtos.WelcomeResponse;
-import com.victor.model.GeoLocation;
 import com.victor.service.WelcomeService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/hello")
@@ -26,11 +22,5 @@ public class AppController {
             @RequestParam(name = "visitor_name") String visitor
     ) {
         return ResponseEntity.ok(welcomeService.welcome(visitor));
-    }
-
-
-    @GetMapping("/geo")
-    public GeoLocation getGeo(){
-        return welcomeService.getGeo();
     }
 }

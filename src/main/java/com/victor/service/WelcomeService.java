@@ -3,13 +3,10 @@ package com.victor.service;
 import com.victor.dtos.WelcomeResponse;
 import com.victor.model.GeoLocation;
 import com.victor.model.Weather;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Map;
 
 @Service
 public class WelcomeService {
@@ -28,9 +25,12 @@ public class WelcomeService {
     }
 
     public WelcomeResponse welcome(String visitor) {
-        String ipAddress = getIpFromGeo();
-        double lat = getLatitudeFromGeo();
-        double lon = getLongitudeFromGeo();
+
+        GeoLocation geoLocation = getGeo();
+
+        String ipAddress = geoLocation.ip();
+        double lat = geoLocation.latitude();
+        double lon = geoLocation.longitude();
 
         Weather weather = getWeather(lat, lon, openWeatherMapApiKey);
         String city = weather.name();
@@ -54,16 +54,5 @@ public class WelcomeService {
         String weatherUrl = String.format("https://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&appid=%s&units=metric", lat, lon, apiKey);
 
         return restTemplate.getForObject(weatherUrl, Weather.class);
-    }
-
-    public String getIpFromGeo() {
-        return getGeo().ip();
-    }
-
-    public double getLatitudeFromGeo() {
-        return getGeo().latitude();
-    }
-    public double getLongitudeFromGeo() {
-        return getGeo().longitude();
     }
 }
