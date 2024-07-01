@@ -4,6 +4,7 @@ import com.victor.dtos.WelcomeResponse;
 import com.victor.handler.NameNotFoundException;
 import com.victor.model.GeoLocation;
 import com.victor.model.Weather;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,12 @@ public class WelcomeService {
     private String openWeatherMapApiKey;
 
     private final RestTemplate restTemplate;
+    private final HttpServletRequest request;
 
     @Autowired
-    public WelcomeService(RestTemplate restTemplate) {
+    public WelcomeService(RestTemplate restTemplate, HttpServletRequest request) {
         this.restTemplate = restTemplate;
+        this.request = request;
     }
 
     public WelcomeResponse welcome(String visitor) {
@@ -38,7 +41,7 @@ public class WelcomeService {
 
         GeoLocation geoLocation = getGeo();
 
-        String ipAddress = geoLocation.ip();
+        String ipAddress = request.getRemoteAddr();
         double lat = geoLocation.latitude();
         double lon = geoLocation.longitude();
 
