@@ -48,8 +48,8 @@ public class WelcomeService {
         double lon = geoLocation.longitude();
 
         Weather weather = getWeather(lat, lon, openWeatherMapApiKey);
-        String city = geoLocation.city();
         var temp =  weather.main().get("temp");
+        String city = weather.name();
         String sanitizedName = visitor.replaceAll("\"", "").trim();
 
         return new WelcomeResponse(
