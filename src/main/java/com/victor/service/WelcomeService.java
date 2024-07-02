@@ -60,7 +60,7 @@ public class WelcomeService {
     }
 
     public GeoLocation getGeo(String ip) {
-        String locationUrl = String.format("https://api.ipgeolocation.io/ipgeo?apiKey=%s&ip=%s", ipGeolocationApiKey, ip);
+        String locationUrl = String.format("https://api.ip2location.io/?key=%s&ip=%s", ipGeolocationApiKey, ip);
 
         return restTemplate.getForObject(locationUrl, GeoLocation.class);
     }
