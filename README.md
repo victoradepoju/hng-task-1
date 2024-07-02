@@ -5,7 +5,7 @@ This project is a Spring Boot application that integrates with external APIs for
 
 ## Features
 
-- **IP Geolocation**: Retrieves geolocation (latitude and longitude) from provided IP Address information using the `ipgeolocation.io` API.
+- **IP Geolocation**: Retrieves geolocation (latitude and longitude) from provided IP Address information using the `ip2location.io` API.
 - **Weather Integration**: Integrates with OpenWeatherMap API to fetch real-time weather information based on user's geolocation.
 
 ## Technologies Used
@@ -13,7 +13,7 @@ This project is a Spring Boot application that integrates with external APIs for
 - Java
 - Spring Boot
 - RESTful API design
-- External API integration (ipgeolocation.io, OpenWeatherMap)
+- External API integration (ip2location.io, OpenWeatherMap)
 
 ## Setup Instructions
 
@@ -26,7 +26,7 @@ This project is a Spring Boot application that integrates with external APIs for
 
 2. **Configure application properties**
 
-   Update `application.properties` or `application.yml` with your API keys for `ipgeolocation.io` and `OpenWeatherMap`.
+   Update `application.properties` with your API keys for `ip2location.io` and `OpenWeatherMap`.
 
 3. **Build and run the application**
 
