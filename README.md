@@ -50,11 +50,4 @@ Deployed on [Railway](https://hng-task-1-production-8fea.up.railway.app/api/hell
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-```
-
-### Notes:
-- **Features**: Updated to reflect the project accurately as an application that integrates with IP geolocation and weather APIs.
-- **Setup Instructions**: Adjusted to focus on configuring API keys and running the application.
-- **API Endpoint**: Reflects the single endpoint `/api/hello?visitor_name="Mark"` for retrieving visitor information.
-- **Deployment**, **Contributors**, and **License**: Remain the same, but ensure to replace placeholders with actual information relevant to your project.
+This project is licensed under the [MIT License](https://github.com/victoradepoju).
